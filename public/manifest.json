@@ -3,7 +3,7 @@
   "short_name": "siga5",
   "theme_color": "#ea9320",
   "background_color": "#000000",
-  "display": "standalone",
+  "display": "fullscreen",
   "orientation": "portrait",
   "Scope": "/",
   "start_url": "./index.html",
