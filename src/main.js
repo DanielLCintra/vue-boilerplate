@@ -4,6 +4,8 @@ import router from './router'
 import store from './store/index'
 import './registerServiceWorker'
 import firebase from './plugins/firebase'
+import './plugins/vuetify'
+import 'vuetify/dist/vuetify.min.css'
 
 Vue.use(firebase, { router })
 Vue.config.productionTip = false
