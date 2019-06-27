@@ -3,11 +3,6 @@
     align-center
     justify-center
   >
-    <toast
-      ref="toast"
-      :type="toastType"
-    />
-
     <v-flex
       xs12
     >
@@ -67,16 +62,43 @@
           </div>
 
           <v-card-actions>
-            <v-btn
-              primary
-              large
-              block
-              :loading="loading"
-              color="secondary"
-              @click.prevent="submit"
+            <v-layout
+              row
+              wrap
             >
-              Entrar
-            </v-btn>
+              <v-btn
+                primary
+                large
+                block
+                :loading="loading"
+                color="secondary"
+                @click.prevent="submit"
+              >
+                Entrar
+              </v-btn>
+
+              <v-btn
+                primary
+                large
+                block
+                color="accent"
+                @click="$router.push({ name: 'auth.signup' })"
+              >
+                Cadastrar
+              </v-btn>
+
+              <v-flex
+                xs12
+                class="py-2"
+              >
+                <div
+                  class="text-xs-center forgot-password"
+                  @click="resetPassword()"
+                >
+                  esqueci minha senha
+                </div>
+              </v-flex>
+            </v-layout>
           </v-card-actions>
         </v-card>
       </v-container>
@@ -85,14 +107,11 @@
 </template>
 
 <script>
-import ToastType from '../../support/ToastType'
-
 export default {
   name: 'AuthSignIn',
 
   data() {
     return {
-      ToastType,
       email: null,
       password: null,
       company: null,
@@ -129,8 +148,8 @@ export default {
       this.loading = true
 
       if (!this.validateForm()) {
-        this.notificate('Preencha os campos obrigatórios para fazer login.')
         this.loading = false
+        this.notificate('Preencha os campos obrigatórios para fazer login.')
         return
       }
 
@@ -192,5 +211,9 @@ export default {
 }
 .theme--light.v-sheet {
   background-color: #d7dee4 !important;
+}
+.text-xs-center.forgot-password {
+  margin-top: 1em;
+  font-size: 15px;
 }
 </style>

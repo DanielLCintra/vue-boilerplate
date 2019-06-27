@@ -1,30 +1,21 @@
 <template>
   <v-container>
-    <h1>Olá, Usuário</h1>
-    <h3>Você 3 serviços vencendo hoje</h3>
-
     <v-btn
       primary
       large
       block
       :loading="loading"
       color="secondary"
-      @click="logout"
+      @click.prevent="$router.push({name: 'auth.signin'})"
     >
-      Sair
+      Voltar
     </v-btn>
   </v-container>
 </template>
 
 <script>
 export default {
-  name: 'HomeContainer',
-
-  methods: {
-    logout() {
-      this.$auth.signOut()
-    }
-  }
+  name: 'AuthSignUp'
 }
 </script>
 
