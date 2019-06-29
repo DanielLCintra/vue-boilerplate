@@ -16,7 +16,7 @@
           </v-card-title>
 
           <v-card-text>
-            <v-text-field
+            <!-- <v-text-field
               v-model="company"
               prepend-icon="store_mall_directory"
               name="company"
@@ -25,7 +25,7 @@
               required
               :error="error_company"
               :error-messages="error_messages_company"
-            />
+            /> -->
 
             <v-text-field
               v-model="email"
@@ -107,6 +107,8 @@
 </template>
 
 <script>
+import sha1 from 'js-sha1'
+
 export default {
   name: 'AuthSignIn',
 
@@ -116,9 +118,9 @@ export default {
       password: null,
       company: null,
       loading: false,
-      notificationMessage: {
-        message: 'Preencha os dados para fazer login'
-      },
+      notificationMessage: [
+        'Preencha os dados para fazer login'
+      ],
       error_email: false,
       error_messages_email: [],
       error_password: false,
@@ -156,6 +158,18 @@ export default {
       const { email, password } = this
       if (email !== '' && password !== '') {
         this.$auth.signInWithEmailAndPassword(email, password)
+          .then(() => {
+            this.notificate('Login realizado com sucesso.')
+            setTimeout(() => {
+              this.$router.push({ name: 'home.list', params: { id: sha1(email) } })
+            }, 3000)
+          })
+          .catch((error) => {
+            this.notificate(error.message)
+          })
+          .finally(() => {
+            this.loading = false
+          })
       }
     },
 
@@ -163,11 +177,11 @@ export default {
       this.clearErrorMessages()
       let valueReturn = true
 
-      if (this.company === '' || this.company === null) {
-        this.error_company = true
-        this.error_messages_company.push('Obrigatório')
-        valueReturn = false
-      }
+      // if (this.company === '' || this.company === null) {
+      //   this.error_company = true
+      //   this.error_messages_company.push('Obrigatório')
+      //   valueReturn = false
+      // }
 
       if (this.email === '' || this.email === null) {
         this.error_email = true

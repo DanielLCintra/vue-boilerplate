@@ -1,4 +1,8 @@
+import Vue from 'vue'
+import { rtdbPlugin } from 'vuefire'
 import firebase from 'firebase'
+
+Vue.use(rtdbPlugin)
 
 const config = {
   apiKey: 'AIzaSyDfj-sew404dalq_bgjcbqhlnZi_iaFnRQ',
@@ -12,28 +16,4 @@ const config = {
 
 const connection = firebase.initializeApp(config)
 
-const DB = connection.database()
-const AUTH = connection.auth()
-
-export default function install(Vue, { router }) {
-  AUTH.onAuthStateChanged((user) => {
-    if (!user) {
-      router.push({ name: 'auth.signin' })
-    } else {
-      router.push({ name: 'home.container' })
-    }
-  })
-
-  Object.defineProperties(Vue.prototype, {
-    $db: {
-      get() {
-        return DB
-      }
-    },
-    $auth: {
-      get() {
-        return AUTH
-      }
-    }
-  })
-}
+export default { DB: connection.database(), AUTH: connection.auth() }

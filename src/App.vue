@@ -4,6 +4,22 @@
   </v-app>
 </template>
 
+<script>
+export default {
+  name: 'App',
+
+  mounted() {
+    this.$auth.onAuthStateChanged((user) => {
+      if (!user) {
+        this.$router.push({ name: 'auth.signin' })
+      } else {
+        this.$router.push({ name: 'home.list' })
+      }
+    })
+  }
+}
+</script>
+
 <style>
 #app {
   display: flex;

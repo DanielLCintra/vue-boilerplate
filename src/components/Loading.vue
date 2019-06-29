@@ -6,7 +6,7 @@
     <v-progress-circular
       indeterminate
       size="100"
-      class="primary--text"
+      class="primary"
     />
   </div>
 </template>
