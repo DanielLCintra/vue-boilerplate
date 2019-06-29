@@ -147,7 +147,6 @@ export default {
 
   mounted() {
     this.$bus.$on('user-loaded', (user) => {
-      alert('entrou aqui')
       this.user = user
     })
   }
