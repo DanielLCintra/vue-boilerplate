@@ -7,12 +7,9 @@ const routes = {
   component: HomeContainer,
   children: [
     {
-      path: '/home/:id',
+      path: '/home',
       name: 'home.list',
-      component: HomeList,
-      props: route => ({
-        id: route.params.id
-      })
+      component: HomeList
     }
   ]
 }

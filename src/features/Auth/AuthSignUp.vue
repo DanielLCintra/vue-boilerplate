@@ -1,13 +1,17 @@
 <template>
   <v-container>
     <a
+      class="back-button"
       href="#"
-      @click.prevent="$router.push({name: 'auth.signin'})"
+      @click.prevent="$router.push({ name: 'auth.signin' })"
     >
       <v-icon large>arrow_back</v-icon>
     </a>
 
-    <v-card flat>
+    <v-card
+      id="signup"
+      flat
+    >
       <v-card-title primary-title>
         <h3 class="headline mb-0">
           Cadastrar
@@ -163,5 +167,15 @@ export default {
 </script>
 
 <style>
-
+.back-button {
+  z-index: 9999;
+  position: absolute;
+  color: transparent !important;
+}
+.v-card.v-card--flat.v-sheet.theme--light {
+  z-index: 999;
+}
+.theme--light.v-sheet#signup {
+  background-color: transparent !important;
+}
 </style>

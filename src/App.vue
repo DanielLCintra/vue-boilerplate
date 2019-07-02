@@ -5,6 +5,9 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+import sha1 from 'js-sha1'
+
 export default {
   name: 'App',
 
@@ -13,9 +16,16 @@ export default {
       if (!user) {
         this.$router.push({ name: 'auth.signin' })
       } else {
+        this.$db.ref(`users/${sha1(user.email)}`).once('value', (snapshot) => {
+          this.setCurrentUser(snapshot.val())
+        })
         this.$router.push({ name: 'home.list' })
       }
     })
+  },
+
+  methods: {
+    ...mapActions('auth', ['setCurrentUser'])
   }
 }
 </script>

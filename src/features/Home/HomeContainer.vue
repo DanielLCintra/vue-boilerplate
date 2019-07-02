@@ -11,8 +11,8 @@
           <v-layout>
             <v-flex xs5>
               <avatar
-                v-if="user.name"
-                :username="user.name"
+                v-if="currentUser.name"
+                :username="currentUser.name"
                 :size="90"
                 class="ml-3"
               />
@@ -22,11 +22,11 @@
               <v-card-title primary-title>
                 <div>
                   <div class="headline">
-                    {{ user.name.split(' ')[0] }}
+                    {{ firstName }}
                   </div>
 
                   <div>
-                    {{ user.company }}
+                    {{ currentUser.company }}
                   </div>
 
                   <div>
@@ -46,12 +46,15 @@
             :key="itemIndex"
             v-model="item.model"
             no-action
+            class="list-item-menu"
           >
             <v-list-tile
               slot="activator"
             >
               <v-list-tile-action>
-                <v-icon class="menu">{{ item.model ? item.icon : item['icon-alt'] }}</v-icon>
+                <v-icon class="menu">
+                  {{ item.model ? item.icon : item['icon-alt'] }}
+                </v-icon>
               </v-list-tile-action>
 
               <v-list-tile-content>
@@ -117,6 +120,7 @@
 
 <script>
 import Avatar from 'vue-avatar'
+import { mapState } from 'vuex'
 
 export default {
   name: 'HomeContainer',
@@ -127,14 +131,37 @@ export default {
 
   data: () => ({
     user: {
-      name: 'Daniel Cintra',
-      company: 'SW5'
+      company: null,
+      document: null,
+      email: null,
+      name: null,
+      password: null
     },
     drawer: false,
     items: [
       {
-        icon: 'calendar_today',
-        text: 'Meus agendamentos',
+        icon: 'house',
+        text: 'Principal',
+        href: '/home'
+      },
+      {
+        icon: 'build',
+        text: 'Serviços',
+        href: '/list'
+      },
+      {
+        icon: 'people',
+        text: 'Clientes',
+        href: '/list'
+      },
+      {
+        icon: 'bar_chart',
+        text: 'Relatórios',
+        href: '/list'
+      },
+      {
+        icon: 'settings',
+        text: 'Configurações',
         href: '/list'
       },
       {
@@ -145,10 +172,16 @@ export default {
     ]
   }),
 
-  mounted() {
-    this.$bus.$on('user-loaded', (user) => {
-      this.user = user
-    })
+  computed: {
+    ...mapState('auth', ['currentUser']),
+
+    firstName() {
+      if (this.currentUser.name) {
+        return this.currentUser.name.split(' ')[0]
+      }
+
+      return ''
+    }
   }
 }
 </script>
@@ -189,10 +222,13 @@ h4.document {
   font-size: 15px !important;
 }
 .v-list--dense {
-  padding-top: 0px;
+  padding-top: 0px !important;
 }
 .ml-3 {
   margin-left: 35px !important;
   margin-top: 10px;
+}
+.v-card.v-card--flat.v-sheet.theme--light {
+  background-color: #d4d4d4 !important;
 }
 </style>

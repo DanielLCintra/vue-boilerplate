@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import localforage from 'localforage'
 import App from './App.vue'
 import router from './router'
 import store from './store/index'
@@ -13,6 +14,7 @@ import eventBus from './plugins/event-bus'
 
 Vue.prototype.$db = firebase.DB
 Vue.prototype.$auth = firebase.AUTH
+Vue.prototype.$lf = localforage
 Vue.config.productionTip = false
 
 Vue.use(eventBus)

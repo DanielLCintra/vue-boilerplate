@@ -7,26 +7,27 @@
       xs12
     >
       <v-container
-        style="position: relative;top: 13%;"
+        style="
+          display: flex;
+          justify-content: center;
+          flex-flow: row wrap;
+          position: relative;
+          top: 6em !important;
+          padding-left: 0px;
+          padding-right: 0px;
+          z-index: 99;
+        "
         class="text-xs-center"
       >
-        <v-card flat>
+        <v-card
+          id="signin"
+          flat
+        >
           <v-card-title primary-title>
             <img src="../../assets/logo.png">
           </v-card-title>
 
           <v-card-text>
-            <!-- <v-text-field
-              v-model="company"
-              prepend-icon="store_mall_directory"
-              name="company"
-              label="Empresa"
-              color="secondary"
-              required
-              :error="error_company"
-              :error-messages="error_messages_company"
-            /> -->
-
             <v-text-field
               v-model="email"
               prepend-icon="person"
@@ -107,8 +108,6 @@
 </template>
 
 <script>
-import sha1 from 'js-sha1'
-
 export default {
   name: 'AuthSignIn',
 
@@ -160,8 +159,9 @@ export default {
         this.$auth.signInWithEmailAndPassword(email, password)
           .then(() => {
             this.notificate('Login realizado com sucesso.')
+
             setTimeout(() => {
-              this.$router.push({ name: 'home.list', params: { id: sha1(email) } })
+              this.$router.push({ name: 'home.list' })
             }, 3000)
           })
           .catch((error) => {
@@ -176,12 +176,6 @@ export default {
     validateForm() {
       this.clearErrorMessages()
       let valueReturn = true
-
-      // if (this.company === '' || this.company === null) {
-      //   this.error_company = true
-      //   this.error_messages_company.push('Obrigatório')
-      //   valueReturn = false
-      // }
 
       if (this.email === '' || this.email === null) {
         this.error_email = true
@@ -223,8 +217,8 @@ export default {
   display: flex;
   justify-content: center;
 }
-.theme--light.v-sheet {
-  background-color: #d7dee4 !important;
+.theme--light.v-sheet#signin {
+  background-color: transparent !important;
 }
 .text-xs-center.forgot-password {
   margin-top: 1em;
