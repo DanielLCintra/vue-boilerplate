@@ -1,45 +1,37 @@
 <template>
   <v-app>
-    <router-view/>
+    <v-app-bar app>
+      <v-toolbar-title class="headline text-uppercase">
+        <span>Vue</span>
+        <span class="font-weight-light">Boilerplate</span>
+      </v-toolbar-title>
+      <v-spacer/>
+      <v-btn
+        text
+        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        target="_blank"
+      >
+        <span class="mr-2">By Daniel Cintra</span>
+      </v-btn>
+    </v-app-bar>
+
+    <v-content>
+      <HelloWorld/>
+    </v-content>
   </v-app>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-import sha1 from 'js-sha1'
+import HelloWorld from './components/HelloWorld'
 
 export default {
   name: 'App',
-
-  mounted() {
-    this.$auth.onAuthStateChanged((user) => {
-      if (!user) {
-        this.$router.push({ name: 'auth.signin' })
-      } else {
-        this.$db.ref(`users/${sha1(user.email)}`).once('value', (snapshot) => {
-          this.setCurrentUser(snapshot.val())
-        })
-        this.$router.push({ name: 'home.list' })
-      }
-    })
+  components: {
+    HelloWorld
   },
 
-  methods: {
-    ...mapActions('auth', ['setCurrentUser'])
-  }
+  data: () => ({
+    //
+  })
 }
 </script>
-
-<style>
-#app {
-  display: flex;
-  position: absolute;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  background-color: #d7dee4;
-  top: 0;
-  left: 0;
-}
-</style>
