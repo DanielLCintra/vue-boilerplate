@@ -8,6 +8,37 @@ ao vuetify.
 Além bibliotecas, possui algumas configurações auxiliares, como padrão de eslint, source-maps do
 vue para achar erros mais facilmente, já está preparado para ser uma pwa e com as configurações necessárias para ser publicado no heroku (opcional).
 
+Obs: Para utilizar lembre de renomear o arquivo .env.example para .env e inserir suas credenciais.
+
+## Preview
+
+![My image](https://vuejsexamples.com/content/images/2017/04/20170416214405.jpg)
+
+## Project setup
+```
+yarn install
+```
+
+### Compilar e hot reload para desenvolvimento
+```
+yarn run serve
+```
+
+### Compilar e minificar para produção
+```
+yarn run build
+```
+
+### Executar testes
+```
+yarn run test
+```
+
+### Lintar arquivos
+```
+yarn run lint
+```
+
 ## Bibliotecas
 ```
 libraries: [
@@ -36,36 +67,9 @@ libraries: [
         href: 'https://github.com/localForage/localForage'
     },
     {
-        text: 'awesome-vuetify',
-        href: 'https://github.com/vuetifyjs/awesome-vuetify'
-    }
+        text: 'axios',
+        href: 'https://github.com/axios/axios'
+    },
+    
 ]
 ```
-
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
-
-### Compiles and minifies for production
-```
-yarn run build
-```
-
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
